@@ -1,2 +1,2 @@
-# commitchecks
+# commitcheck
 
