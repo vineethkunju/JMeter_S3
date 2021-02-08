@@ -1,2 +1,2 @@
-# commitchecsssss
+# commitchecs
 
