@@ -4,17 +4,7 @@ pipeline{
   
   stages{
   
-    stage('Flush Workspace'){
-    //deleting workspace 
-    steps{
-    	 sh '''#!/bin/bash
-		sudo rm -r /home/ec2-user/JMeterContents/HTMLReport/*.*
-		sudo rm -r /home/ec2-user/JMeterContents/HTMLReport/content
-		sudo rm -r /home/ec2-user/JMeterContents/Results/*.*
-		'''
-      }  	    
-  	}
-  	
+
   	stage('Execute Test'){
     
 	    steps{
