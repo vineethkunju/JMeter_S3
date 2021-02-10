@@ -22,10 +22,9 @@ pipeline{
   	stage('Test'){
     
     steps{
-    	 echo 'found something interesting'
+    	 echo 'found something interesting during test'
       }  	    
   	}
-
   
   }
 
