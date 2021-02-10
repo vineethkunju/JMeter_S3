@@ -6,5 +6,6 @@ pipeline{
     
     steps{
      echo 'found something'
+    }
   }
 }
