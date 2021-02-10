@@ -4,31 +4,41 @@ pipeline{
   
   stages{
   	
-  	stage('JMX Download'){
+  	stage('Execute Test'){
     
 	    steps{
-	    	 echo 'found something interesting'
-	    	 
-	    	 git branch: 'JMX', credentialsId: '3f527557-74c4-4e20-8d9a-c50b52c76a23', url: 'https://github.com/vineethkunju/WTC_JP.git'
+	 	 
+			sh '''#!/bin/bash
+			cd /home/ec2-user/apache-jmeter-5.4/bin
+			echo "Starting execution"
+			sudo sh jmeter.sh -n -t  /home/ec2-user/JMeterContents/Scripts/DemoScript-DummySampler_V0.1.jmx -l /home/ec2-user/JMeterContents/Results/DemoScript-DummySampler.csv -e -o  /home/ec2-user/JMeterContents/HTMLReport/'''
 	      }  	    
 	  
 	  	}
 
-	stage('Deploy'){
+	stage('Upload S3'){
 	    
 	    steps{
-	    	 echo 'found something interesting'
+	    	 sh '''#!/bin/bash
+			CURRENTEPOCTIME=`date +"%s"`
+			cd /home/ec2-user/JMeterContents/HTMLReport/
+			aws s3api put-object --bucket bat.jmeterresults --key ${CURRENTEPOCTIME}/
+			aws s3 sync . s3://bat.jmeterresults/${CURRENTEPOCTIME}/'''
 	      }  	    
 	  	}
   	
-  	stage('Test'){
+  	
+  	stage('Clean Workspace'){
     
     steps{
-    	 echo 'found something interesting'
+    	 sh '''#!/bin/bash
+		sudo rm -r /home/ec2-user/JMeterContents/HTMLReport/*.*
+		sudo rm -r /home/ec2-user/JMeterContents/HTMLReport/content
+		sudo rm -r /home/ec2-user/JMeterContents/Results/*.*
+		'''
       }  	    
   	}
-
-  
+ 
   }
 
 }
