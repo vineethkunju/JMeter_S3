@@ -1,11 +1,14 @@
 pipeline{
-  
+ 
   agent any
   
   stages{
     
     steps{
-     echo 'found something'
+     echo 'found something interesting'
+    
     }
+  
   }
+
 }
