@@ -47,7 +47,6 @@ pipeline{
 			http://bat.jmeterresults.s3-website.eu-west-2.amazonaws.com/${CURRENTEPOCTIME}/index.html''', subject: 'Performance Test Results', to: 'vineethpk@hotmail.com'
   	    }
 	}
-
-   }
+  }
 
 }
